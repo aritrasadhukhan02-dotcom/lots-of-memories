@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Beautiful Memories 💕</title>
+    <style>
+        /* ========================================
+           GLOBAL STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ========================================
+           WELCOME PAGE STYLES
+           ======================================== */
+        .welcome-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 50%, #ffe4e6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-content {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInScale 0.6s ease-out;
+            z-index: 10;
+        }
+
+        .welcome-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: slideDown 0.5s ease-out 0.2s both;
+        }
+
+        .welcome-header h1 {
+            font-size: 3rem;
+            color: #9333ea;
+            font-weight: bold;
+        }
+
+        .heart-icon {
+            width: 48px;
+            height: 48px;
+            color: #ec4899;
+            fill: #ec4899;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        .welcome-message {
+            margin-bottom: 40px;
+            animation: slideUp 0.5s ease-out 0.4s both;
+        }
+
+        .welcome-message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 15px;
+        }
+
+        .enter-button {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideUp 0.5s ease-out 0.6s both;
+        }
+
+        .enter-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(147, 51, 234, 0.4);
+        }
+
+        .floating-hearts {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            animation: floatUp 10s linear infinite;
+            opacity: 0.3;
+            color: #fbb6ce;
+        }
+
+        /* ========================================
+           MAIN PAGE STYLES
+           ======================================== */
+        .main-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fef3f2 0%, #f3e8ff 50%, #dbeafe 100%);
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 24px 20px;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .header-title h1 {
+            color: #ec4899;
+            font-size: 1.8rem;
+        }
+
+        .pulse-heart {
+            width: 32px;
+            height: 32px;
+            color: #ec4899;
+            fill: #ec4899;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .header-subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+
+        .main-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 48px 20px;
+        }
+
+        /* ========================================
+           BACK BUTTON
+           ======================================== */
+        .back-button {
+            background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        /* ========================================
+           PANEL STYLES
+           ======================================== */
+        .special-panel {
+            background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .special-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.3);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .panel-icon {
+            width: 40px;
+            height: 40px;
+            color: #ec4899;
+            fill: #ec4899;
+            flex-shrink: 0;
+        }
+
+        .panel-title {
+            font-size: 1.8rem;
+            color: #9333ea;
+            font-weight: bold;
+        }
+
+        .panel-description {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-left: 56px;
+        }
+
+        /* NEW: Panel with cover image - 16:10 aspect ratio for romantic cover photos */
+        .panel-with-cover {
+            position: relative;
+            aspect-ratio: 16/10; /* Fixed 16:10 aspect ratio - optimal for cover images */
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .panel-with-cover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.3);
+        }
+
+        /* Cover image - fills entire 16:10 container */
+        .panel-cover-image {
+            width: 100%;        /* Full width of container */
+            height: 100%;       /* Full height of container */
+            object-fit: cover;  /* Crop to fill maintaining aspect ratio */
+            object-position: center; /* Center the image */
+        }
+
+        /* Gradient overlay - dark at bottom for text readability */
+        .panel-gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+        }
+
+        /* Text content on top of cover image */
+        .panel-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .panel-content h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .panel-content .panel-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .panel-content .panel-hint {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* ========================================
+           MEMORY SECTION
+           ======================================== */
+        .memory-section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #9333ea;
+            text-align: center;
+            margin-bottom: 32px;
+            font-weight: bold;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 100%);
+        }
+
+        .memory-info {
+            padding: 20px;
+        }
+
+        .memory-date {
+            font-size: 0.9rem;
+            color: #9333ea;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .memory-caption {
+            color: #374151;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+
+        /* ========================================
+           MODAL STYLES
+           ======================================== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUpModal 0.3s ease-out;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f3f4f6;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: #e5e7eb;
+            transform: scale(1.1);
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 100%);
+        }
+
+        .modal-message {
+            color: #374151;
+            font-size: 1.1rem;
+            line-height: 2;
+            text-align: center;
+            white-space: pre-wrap;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 32px 20px;
+            text-align: center;
+            margin-top: 64px;
+        }
+
+        .footer-text {
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUpModal {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 768px) {
+            .welcome-header h1 {
+                font-size: 2rem;
+            }
+            .heart-icon {
+                width: 32px;
+                height: 32px;
+            }
+            .header-title h1 {
+                font-size: 1.3rem;
+            }
+            .panel-title {
+                font-size: 1.4rem;
+            }
+            .panel-description {
+                margin-left: 0;
+                margin-top: 8px;
+            }
+            .memory-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         WELCOME PAGE
+         ======================================== -->
+    <div id="welcomePage" class="welcome-page">
+        <div class="welcome-content">
+            <div class="welcome-header">
+                <svg class="heart-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <h1>Welcome</h1>
+                <svg class="heart-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </div>
+            <div class="welcome-message">
+                <p>This site has been created just for you</p>
+                <p>❤️Your all the beautiful moments are preserved.❤️</p>
+            </div>
+            <button class="enter-button" onclick="enterMainPage()">
+                Enter ✨
+            </button>
+        </div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+    </div>
+
+    <!-- ========================================
+         MAIN PAGE 
+         ======================================== -->
+    <div id="mainPage" class="main-page hidden">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <svg class="pulse-heart" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <h1>Our Beautiful Memories</h1>
+                    <svg class="pulse-heart" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <p class="header-subtitle">Every moment with you is a treasure 💕</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- ========================================
+                 COVER IMAGE PANELS - 16:10 aspect ratio
+                 Replace "images/kolpo-cover.jpg" with your actual image paths
+                 ======================================== -->
+            
+            <!-- কল্পি Panel with Cover Image -->
+            <div class="panel-with-cover" onclick="openPage('kolpo')">
+                <!-- Cover Image - 16:10 aspect ratio, fills entire panel -->
+                <img 
+                    src="image/kolpo-cover.jpg" 
+                    alt="কল্পি - Our Special Moments" 
+                    class="panel-cover-image"
+                />
+                
+                <!-- Gradient Overlay - Dark at bottom for text readability -->
+                <div class="panel-gradient-overlay"></div>
+                
+                <!-- Text Content on top of image -->
+                <div class="panel-content">
+                    <h2>কল্পি</h2>
+                    <p class="panel-subtitle">A moment that means everything</p>
+                    <p class="panel-hint">এত সুন্দর হওয়া কি নিয়মে আছে? নাকি শুধু তোমারই বিশেষ ক্ষমতা 💖</p>
+                </div>
+            </div>
+
+            <!-- কথা Panel with Cover Image -->
+            <div class="panel-with-cover" onclick="openPage('kotha')">
+                <!-- Cover Image - 16:10 aspect ratio, fills entire panel -->
+                <img 
+                    src="image/kotha-cover.jpg" 
+                    alt="কথা - Our Sweet Conversations" 
+                    class="panel-cover-image"
+                />
+                
+                <!-- Gradient Overlay -->
+                <div class="panel-gradient-overlay"></div>
+                
+                <!-- Text Content -->
+                <div class="panel-content">
+                    <h2>আমার খুনশুটির পার্টনার</h2>
+                    <p class="panel-subtitle">Words that touched our hearts</p>
+                    <p class="panel-hint">ছোট ছোট স্মৃতিগুলো 💬💕</p>
+                </div>
+            </div>
+
+             <!-- স্মৃতি Panel with Cover Image -->
+            <div class="panel-with-cover" onclick="openPage('smriti')">
+                <!-- Cover Image - 16:10 aspect ratio, fills entire panel -->
+                <img 
+                    src="image/smriti-cover.jpg" 
+                    alt="স্মৃতি - Our Sweet Memories " 
+                    class="panel-cover-image"
+                />
+                
+                <!-- Gradient Overlay -->
+                <div class="panel-gradient-overlay"></div>
+                
+                <!-- Text Content -->
+                <div class="panel-content">
+                    <h2>ঘর</h2>
+                    <p class="panel-subtitle">Words that touched my hearts</p>
+                    <p class="panel-hint">স্মৃতি 💬💕</p>
+                </div>
+            </div>
+        
+           
+            <!-- দুষ্টুমি Section -->
+            <div class="memory-section">
+                <h2 class="section-title"> সব ব্যাখ্যার বাইরে—বন্ধুর চেয়েও বেশি </h2>
+                <div class="memory-grid" id="mainGrid"></div>
+            </div>
+
+           
+            <!-- খুশি Panel with Cover Image -->
+            <div class="panel-with-cover" onclick="openPage('khushi')">
+                <!-- Cover Image - 16:10 aspect ratio, fills entire panel -->
+                <img 
+                    src="image/khushi-cover.jpg" 
+                    alt="খুশি - Our Happy Memories" 
+                    class="panel-cover-image"
+                />
+                
+                <!-- Gradient Overlay -->
+                <div class="panel-gradient-overlay"></div>
+                
+                <!-- Text Content -->
+                <div class="panel-content">
+                    <h2>খুশি</h2>
+                    <p class="panel-subtitle">Smiles that light up my world</p>
+                    <p class="panel-hint"> হাসি-খুশির স্মৃতি 😊✨</p>
+                </div>
+            </div>
+
+             <!-- Cozy Dates Panel with Cover Image -->
+            <div class="panel-with-cover" onclick="openPage('cozy')">
+                <!-- Cover Image - 16:10 aspect ratio, fills entire panel -->
+                <img 
+                    src="image/cozy-cover.jpg" 
+                    alt="Cozy Dates - Our Romantic Moments" 
+                    class="panel-cover-image"
+                />
+                
+                <!-- Gradient Overlay -->
+                <div class="panel-gradient-overlay"></div>
+                
+                <!-- Text Content -->
+                <div class="panel-content">
+                    <h2>Cozy Dates</h2>
+                    <p class="panel-subtitle">Where every moment feels like home</p>
+                    <p class="panel-hint">গল্পভরা সময়গুলো ☕💕</p>
+                </div>
+            </div>
+            
+        </main>
+
+        <footer class="footer">
+            <p class="footer-text">
+                Made with 
+                <svg style="width: 50px; height: 50px; color: #ec4899; fill: #ec4899;" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                for you
+            </p>
+        </footer>
+        
+    </div>
+    
+
+    <!-- ========================================
+         SUB PAGES (Dynamically loaded)
+         ======================================== -->
+    <div id="kolpoPage" class="main-page hidden"></div>
+    <div id="cozyPage" class="main-page hidden"></div>
+    <div id="khushiPage" class="main-page hidden"></div>
+    <div id="kothaPage" class="main-page hidden"></div>
+    <div id="smritiPage" class="main-page hidden"></div>
+    <!-- ========================================
+         MODAL
+         ======================================== -->
+    <div id="modal" class="modal" onclick="closeModalClick(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <p id="modalMessage" class="modal-message"></p>
+        </div>
+    </div>
+
+    <script>
+        /* ========================================
+           IMAGE CONFIGURATION
+           REPLACE THESE PATHS WITH YOUR ACTUAL IMAGE PATHS
+           ======================================== */
+        const IMAGES = {
+            // Main page image
+            dustumi: 'image/dustumi.jpg',
+            
+            // Kolpi section (12 images)
+            saraswati1: 'image/kolpi/saraswati-1.jpg',
+            saraswati2: 'image/kolpi/saraswati-2.jpg',
+            northKolkata: 'image/kolpi/north-kolkata.jpg',
+            southKolkata: 'image/kolpi/south-kolkata.jpg',
+            bonolota: 'image/kolpi/bonolota.jpg',
+            totini: 'image/kolpi/totini.jpg',
+            gram: 'image/kolpi/gram.jpg',
+            pakhider: 'image/kolpi/pakhider-smriti.jpg',
+            samudra: 'image/kolpi/samudra.jpg',
+            lakshmi: 'image/kolpi/lakshmi.jpg',
+            dristi: 'image/kolpi/dristi.jpg',
+            rag: 'image/kolpi/rag.png',
+            hawa: 'image/kolpi/hawa.jpg',
+            
+            // smriti section (6 images)
+            smriti1: 'image/smriti/smriti1.jpg',
+            smriti2: 'image/smriti/smriti2.jpg',
+            smriti3: 'image/smriti/smriti3.jpg',
+            smriti4: 'image/smriti/smriti4.jpg',
+            smriti5: 'image/smriti/smriti5.jpg',
+        
+
+            // Cozy Dates section (6 images)
+            jhogra: 'image/cozy/jhogra.jpg',
+            nirobota: 'image/cozy/nirobota.jpg',
+            protham: 'image/cozy/protham-ghora.jpg',
+            jonmodin: 'image/cozy/jonmodin.jpg',
+            hasi: 'image/cozy/hasi.jpg',
+            niruddesh: 'image/cozy/niruddesh.jpg',
+            
+            // Khushi section (6 images)
+            khushi1: 'image/khushi/golaper-arale.jpg',
+            khushi2: 'image/khushi/oitihyer-saje.jpg',
+            khushi3: 'image/khushi/station-golap.jpg',
+            khushi4: 'image/khushi/cafe-golap.jpg',
+            khushi5: 'image/khushi/boi-golap.jpg',
+            khushi6: 'image/khushi/pran.jpg',
+
+    
+            
+            // Kotha section (2 images)
+            kotha1: 'image/kotha/utsober-ronge.jpg',
+            kotha2: 'image/kotha/nil-alor-jadu.jpg',
+            kotha3: 'image/kotha/ma.jpg'
+        };
+
+        /* ========================================
+           DATA CONFIGURATION
+           ALL MEMORIES WITH CAPTIONS AND MESSAGES
+           ======================================== */
+        const DATA = {
+            // Main page memories
+            main: [
+                {
+                    image: IMAGES.dustumi,
+                    date: 'Peaceful moments with Freinds',
+                    caption: ' বেলা বয়ে যায়, ছোট্ট মোদের পানসি তরী সঙ্গে কে কে যাবি আয় ',
+                    message: '🌸 Every walk with them  feels like a dream. Thank you for being my peace and my adventure! 🌿'
+                }
+            ],
+            
+            // Kolpi section (কল্পি)
+            kolpo: [
+                {
+                    title: 'Saraswati Puja',
+                    memories: [
+                        {
+                            image: IMAGES.saraswati1,
+                            date: 'Saraswati Puja 2024',
+                            caption: 'You looked so beautiful in this saree at the puja',
+                            message: '🌸 Kalpi, you looked absolutely stunning during Saraswati Puja! The way you celebrated with such joy made my heart so full. Every moment with you is a blessing! 💕'
+                        },
+                        {
+                            image: IMAGES.saraswati2,
+                            date: 'Gorgeous 2024',
+                            caption: 'Beautiful moments at Dhaka University',
+                            message: '✨ This day was so special! Seeing you enjoy the festivities, your smile lighting up everything around you - I felt so lucky to be able to capture these precious moments! 🙏💖'
+                        }
+                    ]
+                },
+                {
+                    title: 'North Kolkata - New Year Celebration',
+
+                    memories: [
+                        {
+                            image: IMAGES.northKolkata,
+                            date: 'First Time in North Kolkata',
+                            caption: 'Exploring the heritage streets together',
+                            message: '🏛️ Kalpi, our first adventure in North Kolkata! Walking through those old lanes with you, seeing the vintage charm through your eyes made everything magical. You look absolutely stunning against that heritage backdrop! 💕✨'
+                        }
+                    ]
+                },
+                {
+                    title: 'South Kolkata - Trendy Vibes',
+                    memories: [
+                        {
+                            image: IMAGES.southKolkata,
+                            date: 'Evening in South Kolkata',
+                            caption: 'Gen-Z vibes and aesthetic moments',
+                            message: '✨ This was such a vibe! South Kolkata nights hit different when you\'re with me, Kalpi! The aesthetic lights, the trendy spots, and you looking absolutely gorgeous - pure Gen-Z goals! 🌃💫 You\'re my whole aesthetic! 🔥'
+                        }
+                    ]
+                },
+                {
+                    title: 'হাসি',
+                    memories: [
+                        {
+                            image: IMAGES.bonolota,
+                            date: 'বনলতা',
+                            caption: 'গাছের পাতার ফাঁকে সূর্যের আলো যেমন নাচে, তেমনি তোমার হাসি ',
+                            message: '🌿  যেমন সূর্যের আলো গাছের পাতার ফাঁকে নাচে, তেমনি তোমার হাসিও  আলো ছড়ায়। তোমার শাড়ির রঙে মিশে আছে প্রকৃতির দোলা, তুমিই যেন বৃষ্টিভেজা পাতার নির্জন আকুলতা। 🌸💕'
+                        }
+                    ]
+                },
+                {
+                    title: 'তটিনী',
+                    memories: [
+                        {
+                            image: IMAGES.totini,
+                            date: 'তটিনী',
+                            caption: 'স্রোতে ভেসে চলা একমাত্র দিশা',
+                            message: '🌊  নদীর হাওয়ায় ভেসে যাওয়া নিঃশব্দ চাহনি, চারপাশে সবুজ, মেঘের নরম রঙিন বাণী। জলে ভাসা দুপুরে তুমি এক শান্ত দৃশ্যশিল্প, প্রকৃতি যেন নিজ হাতে এঁকেছে তোমার প্রতিচ্ছবি  💙🚤'
+                        }
+                    ]
+                },
+                {
+                    title: 'রাঙা মাটির পথ',
+                    memories: [
+                        {
+                            image: IMAGES.gram,
+                            date: 'গ্রাম',
+                            caption: 'গ্রামছাড়া ওই রাঙা মাটির পথ আমার মন ভুলায় রে',
+                            message: '🌾  গ্রামছাড়া ওই রাঙা মাটির পথ আমার মন ভুলায় রে। ওরে কার পানে মন হাত বাড়িয়ে লুটিয়ে যায় ধুলায় রে। তোমার সাথে এই সবুজ মাঠে, তুমি আমার গ্রামবাংলার স্বপ্ন। 🌿💚'
+                        }
+                    ]
+                },
+                {
+                    title: 'পাখিদের স্মৃতি',
+                    memories: [
+                        {
+                            image: IMAGES.pakhider,
+                            date: 'পাখিদের স্মৃতি',
+                            caption: ' সোনালি শাড়িতে যেন এক স্বপ্ন',
+                            message: '🐦সোনালি আলোয় মেখে থাকা ওই হাসির রেখা, ওই সাজের সঙ্গে মানায় ঐ লাল-গোলাপী দেখা। শান্ত, মিষ্টি, মার্জিত—সবই যেন এক ফ্রেমে 🌟💕'
+                        }
+                    ]
+                },
+                {
+                    title: 'সমুদ্র',
+                    memories: [
+                        {
+                            image: IMAGES.samudra,
+                            date: 'সমুদ্র',
+                            caption: 'সমুদ্রের ঢেউয়ের মতো   অনন্ত',
+                            message: '🌊 সমুদ্রের ধারে বসে তুমি যেন এক কবিতা।  চুলের মধ্যে দিয়ে সমুদ্রের বাতাস খেলা করছে, আর তুমি বসে আছো একান্তে । 🌅💖'
+                        }
+                    ]
+                },
+                {
+                    title: 'গোধূলির গান',
+                    memories: [
+                        {
+                            image: IMAGES.lakshmi,
+                            date: 'মায়াবী চোখ',
+                            caption: 'বসন্তের পরাণ',
+                            message: '✨ রোদে ঝলমল  শাড়ির পাড়ে গোধূলির গান, মেঠো রোদে  যেন বসন্তের পরাণ। নরম চোখের হাসিতে ফুটে আছে নির্মলতা, আজও রোদ থেমে তাকিয়ে শুধু তোমার সৌন্দর্যতা।  🪷💛'
+                        }
+                    ]
+                },
+                {
+                    title: 'দৃষ্টি',
+                    memories: [
+                        {
+                            image: IMAGES.dristi,
+                            date: 'দৃষ্টি',
+                            caption: 'তোমার চোখে যেন রূপকথা',
+                            message: '👁️ ওই চশমার ফাঁক দিয়ে তাকানো চোখটা, straight-up হার্ট হ্যাক করছে 😏 লাল শাড়িতে যেন রূপকথার কুইন, আর ওই ড্রিপিং vibes—সাবধান, সব ফ্যান্স ডাউন! 😂 এক কথায়, তুমি মাই ড্রিমস, কিন্তু চশমা দিয়ে তাকালে তো level-up চুরি!  ❤️👓'
+                        }
+                    ]
+                },
+                {
+                    title: 'রাগ',
+                    memories: [
+                        {
+                            image: IMAGES.rag,
+                            date: 'রাগ',
+                            caption: 'প্রকৃতির কোলে তোমার নীরবতা আমার প্রিয় সুর',
+                            message: '🎶  গাছের নিচে বসে থাকা তুমি, রাগ করছো , আর সেটাই তো সবচেয়ে অবাক করা ব্যাপার 😏 সবুজ মাঠ আর নীল আকাশের মাঝে তুমি, অথচ রাগের কোনো trace নেই—প্রকৃতিই যেন confused! 😂 তোমার চিন্তামগ্ন মুখ আর শান্ত ভঙ্গি দেখলে মনে হয়, রাগ করাও এক ধরনের ফ্যাশন স্টেটমেন্ট 🌾💚'
+                        }
+                    ]
+                },
+                {
+                    title: 'হাওয়া',
+                    memories: [
+                        {
+                            image: IMAGES.hawa,
+                            date: 'হাওয়া',
+                            caption: 'চুলটা সামলাও, হাওয়া আজ খুবই মুডে আছে।',
+                            message: '🌬️  ছাদেবাতাসের ছোঁয়ায় উড়ছে তোমার চুলের রেশ, আকাশও থমকে বলছে—"কি অপূর্ব আবেশ!" শহরের বুকেও তোমার প্রাকৃতিক সহজতা, বাতাসও মনে হয় তোমায় ছুঁয়ে পায় শান্ততা।💛✨'
+                        }
+                    ]
+                }
+            ],
+             
+            // smriti section (স্মৃতি)
+            smriti: [
+                {
+                    title: 'একসাথে থাকলেই সম্পূর্ণ',
+                    memories: [
+                        {
+                            image: IMAGES.smriti1,
+                            date: '"Drama high, love higher"',
+                            caption: 'Matching attitude, unmatched love.',
+                            message: 'এখানে একা থেকে বুঝেছি, পরিবারের শব্দটাই কতটা নরম, কতটা আশ্রয়। হাসিখুশি থাকলেও, রাতে ঘুমোতে গেলেই তোমাদেরই মুখগুলো ভেসে ওঠে।  💕🌺'
+                        }
+                    ]
+                },
+                {
+                    title: 'Baba = ATM + emotional shield',
+                    memories: [
+                        {
+                            image: IMAGES.smriti2,
+                            date: 'সবচেয়ে সilent কিন্তু সবচেয়ে শক্ত ভালোবাসা',
+                            caption: 'বকুনি daily, but love unlimited. 😌',
+                            message: '🌼রাগ, শাসন, আর অগাধ আদর—বাবা মানেই সবকিছুর perfect mix 💖'
+                        }
+                    ]
+                },
+                {
+                    title: 'ফিরে পাওয়ার অপেক্ষা রোজই',
+                    memories: [
+                        {
+                            image: IMAGES.smriti3,
+                            date: 'হাসির কারণ? আমার পরিবারই',
+                            caption: 'রাগ করি, কিন্তু রাগ ভাঙে ওদের হাতেই।"',
+                            message: '🌹এখানে একা থেকে বুঝেছি, পরিবারের শব্দটাই কতটা নরম, কতটা আশ্রয়। হাসিখুশি থাকলেও, রাতে ঘুমোতে গেলেই তোমাদেরই মুখগুলো ভেসে ওঠে। 💕'
+                        }
+                    ]
+                },
+                {
+                    title: ' ঘর, ভালোবাসা আর শান্তি',
+                    memories: [
+                        {
+                            image: IMAGES.smriti4,
+                            date: 'বন্ধুত্ব যদি সিনেমা হয়,  তোমরাই আমার আসল বন্ধু',
+                            caption: 'Fight করি, কিন্তু খাইও আবার একসাথে।',
+                            message: '💙 এখানে পড়েছি, শিখছি, নতুন করে নিজেকে তৈরি করছি, কিন্তু সত্যি বলতে? ঘরের গন্ধ, মা-বাবার ডাকা আর দাদার খুনশুটি—সবটাই অসম্ভব ভাবে মিস করছি। ☕💕'
+                        }
+                    ]
+                },
+                {
+                    title: 'তোমরাই আমার  আলো',
+                    memories: [
+                        {
+                            image: IMAGES.smriti5,
+                            date: 'No Matter What',
+                            caption: 'আমার সবচেয়ে নিরাপদ হাসি—পরিবার 💕',
+                            message: '📖 অনেক মানুষের ভিড়েও তোমাদের জন্যই মনটা একা হয়ে যায়। দূরে থেকেও প্রতিদিন বুঝি—পরিবারই আমার আসল আরাম, আসল ঠিকানা। 💖'
+                        }
+                    ]
+                },
+                
+            ],
+            
+
+
+
+            // Cozy Dates section
+            cozy: [
+                {
+                    title: 'ঝগড়া শেষে নীরবতা',
+                    memories: [
+                        {
+                            image: IMAGES.jhogra,
+                            date: 'ঝগড়া শেষে নীরবতা',
+                            caption: 'ঝগড়ার পর তোমার পাশে চুপচাপ বসে থাকা—এই মুহূর্তগুলো',
+                            message: '💕ঝগড়ার শব্দ থেমে যায়, এবং নীরবতা ঢুকে আসে।" 🌸 "চোখের দিকে তাকিয়ে কিছু বলা হয় না, শুধু নীরবতা কথা বলে।" 🌙 "এই নীরবতায় মিশে থাকে দূরত্ব, মলিন অনুভূতি আর অমীমাংসিত গল্প।"🌸💖'
+                        }
+                    ]
+                },
+                {
+                    title: 'অজানা পথে',
+                    memories: [
+                        {
+                            image: IMAGES.nirobota,
+                            date: 'অসম্পূর্ণতা',
+                            caption: 'নীরবতার মধ্যে লুকিয়ে থাকা হাজারো অব্যক্ত মুহূর্ত ',
+                            message: '✨ নীরব মুহূর্তগুলোই সবচেয়ে কাছের মনে হয়। কথা না থাকলেও চোখের ভঙ্গি, হাসির আভা, আর চারপাশের নীরবতা যেন নিজস্ব ভাষায় কথা বলে। সিঁড়িতে পাশাপাশি বসে থাকা—এটাই যেন দিনের সবচেয়ে শান্ত ও গভীর সময়। সেই নীরবতার মধ্যেও অনুভবগুলো জাগ্রত থাকে, আর মন নিরবধি এক সুরে ভেসে যায়। এই শান্ত, স্থির উপস্থিতিই কখনও কখনও সবচেয়ে সুন্দর আবেগের ব্যাখ্যা হয়ে ওঠে। 🎵💙'
+                        }
+                    ]
+                },
+                {
+                    title: 'আলাপ (অষ্টমী)',
+                    memories: [
+                        {
+                            image: IMAGES.protham,
+                            date: 'প্রথম ঘোরা (অষ্টমী)',
+                            caption: 'অষ্টমীর দিন তোমার সাথে প্রথম ঘোরা - একটি  আবেগের মুহূর্ত ',
+                            message: '🎉  অষ্টমীর সেই প্রথম বাইরে যাওয়ার দিনটি এখনো মনে বিশেষভাবে জায়গা করে আছে। ঐতিহ্যবাহী পোশাকে এবং পুরনো স্থাপত্যের সামনে দাঁড়ানো মুহূর্তগুলো যেন শান্ত ও সময়হীন এক স্মৃতি হয়ে আছে। পাশে থাকার অনুভূতিটা ছিল স্বস্তির, কোনো বাড়তি শব্দ নয়, শুধু উপস্থিতির নীরব সৌন্দর্য। প্রথম দিনের সেই অভিজ্ঞতা নিঃশব্দে মনে রয়ে গেছে, ঠিক যেমন থাকে গভীর কোনো স্মৃতির নরম আলো। 🌿🌺💕'
+                        }
+                    ]
+                },
+                {
+                    title: 'জন্মদিন',
+                    memories: [
+                        {
+                            image: IMAGES.jonmodin,
+                            date: 'জন্মদিন',
+                            caption: 'তোমার জন্মদিনে একসাথে - কলেজ থেকে বেরিয়ে আমাদের প্রিয় স্মৃতি',
+                            message: '🎂 Kalpi, জন্মদিনের সেই মুহূর্তগুলো এখনো অমূল্য মনে হয়। কলেজ থেকে বেরিয়ে দু’জনে কাটানো সময়, সেই স্বতঃস্ফূর্ত হাসি—সবই আজও স্মৃতিতে স্পষ্ট। জন্মদিনে পাশে থাকার অনুভূতিটাই ছিল দিনের সবচেয়ে উজ্জ্বল অংশ। প্রতি বছর এভাবেই হাসির মধ্যে সময় কাটুক,  Happy Birthday my forever love! 🎉💖✨'
+                        }
+                    ]
+                },
+                {
+                    title: 'হাসি',
+                    memories: [
+                        {
+                            image: IMAGES.hasi,
+                            date: 'হাসি',
+                            caption: 'সবসময় এমন ভাবেই হাসতে থাকিস',
+                            message: '😄 প্রকৃতির নীরবতায় একসঙ্গে বসে থাকা—দিনটা অন্যরকম শান্তি । চোখে চশমা, মুখে স্বতঃস্ফূর্ত হাসি—ছবিটা যতবার দেখি, ঠিক ততবার সহজ আনন্দ ফিরে আসে। এই মুক্ত, অনায়াস হাসি দীর্ঘ সময় এমনই থাকুক—এটাই চাই। 🌿 প্রকৃতির মাঝে তোমার সাথে বসে থাকা, তোমার হাসি দেখা - এটাই আমার স্বর্গ। চিরকাল এভাবেই হাসতে থেকো 🌴💚😊'
+                        }
+                    ]
+                },
+                {
+                    title: 'নিরুদ্ধেশ',
+                    memories: [
+                        {
+                            image: IMAGES.niruddesh,
+                            date: 'নিরুদ্ধেশ',
+                            caption: 'কোনো পরিকল্পনা ছাড়াই তোমার সাথে অজানা পথে - সবচেয়ে রোমাঞ্চকর অভিযান',
+                            message: '🌙  কোনো গন্তব্য ঠিক না করেই  একসাথে বেরিয়ে পড়া - গন্তব্য নয়,  সাথে থাকাটাই আসল! আমরা কোথায় যাচ্ছি তা জানতাম না, কিন্তু  হাত ধরে হাঁটতে হাঁটতে মনে হয়েছিল  হারিয়ে যাওয়াও এক সবচেয়ে সুন্দর অভিযান, আমার সবচেয়ে প্রিয় নিরুদ্ধেশ যাত্রা। 🗺️💕🌟'
+                        }
+                    ]
+                }
+            ],
+            
+            // Khushi section (খুশি)
+            khushi: [
+                {
+                    title: 'আড়ালে থাকা',
+                    memories: [
+                        {
+                            image: IMAGES.khushi1,
+                            date: 'লজ্জা নাকি স্টাইল',
+                            caption: 'গোলাপ দিয়ে মুখ ঢেকে রেখেও সৌন্দর্য লুকানো যায় না',
+                            message: '🌹গোলাপ দিয়ে মুখ ঢাকলে কি আর লুকোনো যায়? 😂চোখের হাসিটা তো এমনিতেই সব leak করে দেয়! ফুল থাক বা না থাক— তুমি cutestই থাকবে  Nice try, Miss Rose. 💕🌺'
+                        }
+                    ]
+                },
+                {
+                    title: 'ঐতিহ্যের সাজে তুমি',
+                    memories: [
+                        {
+                            image: IMAGES.khushi2,
+                            date: 'সাদা-লাল শাড়িতে',
+                            caption: 'ঐতিহ্যবাহী সাজে তুমি দেখতে এক অপরূপ সুন্দরী',
+                            message: '🌼 ওহ মাই গড!সাদা-লাল শাড়ি, হলুদ ফুল, চশমা— পুরো Bengali Queen Reloaded 😎পিলারের সামনে দাঁড়িয়ে এমন pose দিয়েছো, মনে হচ্ছে কোনো museum-এ রাখা heritage statue! এই ছবি দেখে  চোখ ফেরানো যাচ্ছে না! 😍  🌺💖'
+                        }
+                    ]
+                },
+                {
+                    title: 'স্টেশনে গোলাপ',
+                    memories: [
+                        {
+                            image: IMAGES.khushi3,
+                            date: 'স্টেশনে অপেক্ষা',
+                            caption: 'এত ফুল কেন? খাবার নিয়ে আসলেই পারতে!"',
+                            message: '🌹 স্টেশনে ফুল হাতে একদম সিনেমার দৃশ্য— হলুদ, গোলাপি, perfect romantic setup 💐✨ঠিক তখনই এন্ট্রি: "এত ফুল কেন? খাওয়ার কিছু আছে?" 😂 সোজা প্ল্যাটফর্ম নম্বর ৩-এ derail! 🚉 😂 তবু ফুল নিয়ে সেই হাসি স্টেশনের লাইটও যেন extra glow দিল 🌟 পরের বার সোজা combo package: ফুল + চকলেট + বিরিয়ানি 🍫🍛💐এটাই safe move 😎😄💕'
+                        }
+                    ]
+                },
+                {
+                    title: ' Surprise দিতে ম্যাডাম জি ঢাকাতে',
+                    memories: [
+                        {
+                            image: IMAGES.khushi4,
+                            date: 'বন্ধুত্ব যদি সিনেমা হয়, এটা ছিল pure jump-scare scene',
+                            caption: 'সাডেন মিট = চমক + চিৎকার + ১০০টা প্রশ্ন! 🤯',
+                            message: '💙  হঠাৎ হাজির হওয়া মাত্রই বন্ধুদের মুখের এক্সপ্রেশন ছিল priceless— কেউ চমকাচ্ছিল, কেউ আবার ভেবেছে ভূত নাকি সত্যিই ফিরে এসেছে! সাডেন মিটটা এমন ছিল, যেন গ্রুপচ্যাটে “typing…” দেখা যায় কিন্তু মেসেজ আসে না— সম্পূর্ণ অপ্রত্যাশিত, মজার আর একদম অফ-স্ক্রিপ্ট মুহূর্ত। বন্ধুর রিঅ্যাকশনই বলে দিল, সারপ্রাইজ প্ল্যান পুরো সফল! 😄☕💕'
+                        }
+                    ]
+                },
+                {
+                    title: 'বইয়ের পাতায় ',
+                    memories: [
+                        {
+                            image: IMAGES.khushi5,
+                            date: 'No Matter What',
+                            caption: 'বই হাতে গোলাপ— মেলাটাই অন্যরকম, জ্ঞান আর সৌন্দর্যের soft combo vibes।',
+                            message: '📖 বই হাতে নিলেও পাতা উল্টায় না, তবুও পরীক্ষার হলে উত্তর কোথাও না কোথাও মিলেই যায় 😌 বন্ধুরা ভাবে জ্ঞানী, আসলে ভাগ্যের WiFi একটু শক্তিশালী 📶 নোট নেয় না, ক্লাস শোনে না— তবু রেজাল্টে নামটা ঠিকই ওঠে 🤷‍♂️ হালকা খোঁচা দিতেই হয়— ট্যালেন্ট না লুকানো নোটস? 😏📚এটা তোর জন্য না আমার জন্য 😂 💖'
+                        }
+                    ]
+                },
+                {
+                    title: 'You + Me = Cozy Vibes',
+                    memories: [
+                        {
+                            image: IMAGES.khushi6,
+                            date: 'Love, but make it soft 💕',
+                            caption: 'No comment Only  feelings 😌✨',
+                            message: '💕 You’re my soft corner + safe vibe combo 😌✨ no rush, just warm feelings & silly smiles 🤭🌷 💞✨'
+                        }
+                    ]
+                }
+            ],
+            
+            // Kotha section (কথা)
+            kotha: [
+                {
+                    title: 'মায়ের সাথে দুষ্টুমি',
+                    memories: [
+                        {
+                            image: IMAGES.kotha1,
+                            date: 'দুষ্টুমি',
+                            caption: ' এই রঙিন মুহূর্ত',
+                            message: '❤️ মা মানে সেই মানুষটা, যাকে আমি রোজ খুনশুটি করি আর শেষে গিয়ে জড়িয়ে ধরি 🤭💗 বকুনি দিলেও, দুই মিনিট পরেই জিজ্ঞেস করে— “খাসি? জল খাবি?” 😌 তার হাসির ভিতরেই আমার সব দুষ্টুমি safe, আর সব রাগ instantly vanish ✨ সত্যি বলতে, মা-ই আমার সেই partner in crime, যিনি সব জানেন… তারপরও কিছু বলেন না 😜💕✨'
+                        }
+                    ]
+                },
+                {
+                    title: ' সবসময়',
+                    memories: [
+                        {
+                            image: IMAGES.kotha2,
+                            date: 'সিম্পল কিন্তু খুবই সুন্দর',
+                            caption: 'differently in a saree!',
+                            message: '💙এই ছবিটায়  মা তোমার মুখের শান্ত হাসিটাই যেন পুরো প্রকৃতিকে কোমল করে দিয়েছে। 🎭'
+                        }
+                    ]
+                },
+                {
+                    title: ' মা: প্রতিটি দিনের চেনা আশ্রয়',
+                    memories: [
+                        {
+                            image: IMAGES.kotha3,
+                            date: 'মায়ের ছায়া',
+                            caption: 'তাঁর হাত, তাঁর চোখ, তাঁর ভালোবাসা— সবটাই নিঃশব্দে আগলানো স্নেহ!',
+                            message: '💙হাসি, কান্না, ব্যস্ততা, ক্লান্তি— সব মুহূর্তেই তাঁর উপস্থিতি অটুট। কথা কম, অনুভূতি গভীর; মা প্রতিটি সময়েই ভরসা 🎭'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        /* ========================================
+           GLOBAL VARIABLES
+           ======================================== */
+        let currentPage = 'welcome';
+
+        /* ========================================
+           INITIALIZATION
+           ======================================== */
+        function init() {
+            createFloatingHearts();
+            loadMainMemories();
+        }
+
+        /* ========================================
+           CREATE FLOATING HEARTS ANIMATION
+           ======================================== */
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 6; i++) {
+                const heart = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                heart.classList.add('floating-heart');
+                heart.setAttribute('viewBox', '0 0 24 24');
+                heart.setAttribute('fill', 'currentColor');
+                heart.style.width = (20 + Math.random() * 20) + 'px';
+                heart.style.height = (20 + Math.random() * 20) + 'px';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = i * 2 + 's';
+                heart.innerHTML = '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>';
+                container.appendChild(heart);
+            }
+        }
+
+        /* ========================================
+           LOAD MAIN PAGE MEMORIES
+           ======================================== */
+        function loadMainMemories() {
+            const grid = document.getElementById('mainGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            DATA.main.forEach((memory) => {
+                const card = createMemoryCard(memory);
+                grid.appendChild(card);
+            });
+        }
+
+        /* ========================================
+           CREATE MEMORY CARD ELEMENT
+           ======================================== */
+        function createMemoryCard(memory) {
+            const card = document.createElement('div');
+            card.classList.add('memory-card');
+            card.onclick = () => openModal(memory);
+            card.innerHTML = `
+                <img src="${memory.image}" alt="${memory.caption}" class="memory-image" loading="lazy">
+                <div class="memory-info">
+                    <p class="memory-date">${memory.date}</p>
+                    <p class="memory-caption">${memory.caption}</p>
+                </div>
+            `;
+            return card;
+        }
+
+        /* ========================================
+           CREATE SECTION HTML FOR SUB PAGES
+           ======================================== */
+        function createSectionHTML(sections, color) {
+            let html = '';
+            sections.forEach(section => {
+                html += `
+                    <div class="memory-section">
+                        <h2 class="section-title" style="color: ${color}">${section.title}</h2>
+                        <div class="memory-grid">
+                `;
+                section.memories.forEach(memory => {
+                    const memoryJSON = JSON.stringify(memory).replace(/'/g, "\\'");
+                    html += `
+                        <div class="memory-card" onclick='openModal(${memoryJSON})'>
+                            <img src="${memory.image}" alt="${memory.caption}" class="memory-image" loading="lazy">
+                            <div class="memory-info">
+                                <p class="memory-date">${memory.date}</p>
+                                <p class="memory-caption">${memory.caption}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
+        /* ========================================
+           ENTER MAIN PAGE FROM WELCOME
+           ======================================== */
+        function enterMainPage() {
+            document.getElementById('welcomePage').classList.add('hidden');
+            document.getElementById('mainPage').classList.remove('hidden');
+            currentPage = 'main';
+        }
+
+        /* ========================================
+           OPEN SUB PAGE (Kolpi, Cozy, Khushi, Kotha)
+           ======================================== */
+        function openPage(page) {
+            document.getElementById('mainPage').classList.add('hidden');
+            const pageElement = document.getElementById(page + 'Page');
+            
+            let title = '';
+            let subtitle = '';
+            let data = [];
+            let color = '#9333ea';
+            
+            // Configure page based on which section is selected
+            switch(page) {
+                case 'kolpo':
+                    title = 'কল্পি - Some  Special Memories';
+                    subtitle = ' Restricted content 💕';
+                    data = DATA.kolpo;
+                    color = '#9333ea';
+                    break;
+                    case 'smriti':
+                    title = 'My family My home ';
+                    subtitle = ' Everytime I miss you 💕';
+                    data = DATA.smriti;
+                    color = '#9333ea';
+                    break;
+                case 'cozy':
+                    title = 'Cozy Dates - Our Special Moments';
+                    subtitle = 'Every moment with you is precious 💕';
+                    data = DATA.cozy;
+                    color = '#ea580c';
+                    break;
+                case 'khushi':
+                    title = 'খুশি - Happy Memories';
+                    subtitle = 'তোমার সাথে প্রতিটি মুহূর্ত খুশির 😊✨';
+                    data = DATA.khushi;
+                    color = '#ec4899';
+                    break;
+                case 'kotha':
+                    title = 'কথা - Our Conversations';
+                    subtitle = 'প্রতিটি কথা, প্রতিটি মুহূর্ত - তোমার সাথে 💕';
+                    data = DATA.kotha;
+                    color = '#9333ea';
+                    break;
+            }
+            
+            // Build page HTML
+            pageElement.innerHTML = `
+                <header class="header">
+                    <div class="header-content">
+                        <button class="back-button" onclick="closePage('${page}')">← Back to Memories</button>
+                        <div class="header-title">
+                            <h1 style="color: ${color}">${title}</h1>
+                        </div>
+                        <p class="header-subtitle">${subtitle}</p>
+                    </div>
+                </header>
+                <main class="main-content">
+                    ${createSectionHTML(data, color)}
+                </main>
+            `;
+            
+            pageElement.classList.remove('hidden');
+            currentPage = page;
+        }
+
+        /* ========================================
+           CLOSE SUB PAGE AND RETURN TO MAIN
+           ======================================== */
+        function closePage(page) {
+            document.getElementById(page + 'Page').classList.add('hidden');
+            document.getElementById('mainPage').classList.remove('hidden');
+            currentPage = 'main';
+        }
+
+        /* ========================================
+           OPEN MODAL WITH SPECIAL MESSAGE
+           ======================================== */
+        function openModal(memory) {
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modalImage');
+            const modalMessage = document.getElementById('modalMessage');
+            
+            modalImage.src = memory.image;
+            modalMessage.textContent = memory.message;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        /* ========================================
+           CLOSE MODAL
+           ======================================== */
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* ========================================
+           CLOSE MODAL WHEN CLICKING OUTSIDE
+           ======================================== */
+        function closeModalClick(event) {
+            if (event.target.id === 'modal') {
+                closeModal();
+            }
+        }
+
+        /* ========================================
+           START APPLICATION WHEN PAGE LOADS
+           ======================================== */
+        window.onload = init;
+    </script>
+</body>
+</html>
